@@ -19,6 +19,7 @@
       height: 150px;
       font-size: 24px;
       font-weight: bold;
+      margin-bottom: 10px;
     }
     /* Add some padding to the cards */
     .card-body {
@@ -29,46 +30,17 @@
 
 <body>
     <div class="container">
-        <div>
             <h2>Mobile Companies</h2>
-        </div>
         <div class="row">
-          <div class="col-md-6 col-lg-4">
-            <div class="card bg-info text-white">
-              <div class="card-body">
-                Samsung
+          <% for (var i=0; i<data.length; i++) { %>
+            <div class="col-md-6 col-lg-4">
+              <div class="card bg-info text-white">
+                <div class="card-body">
+                  <%= data[i].competitor %>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <div class="card bg-success text-white">
-              <div class="card-body">
-                vivo
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <div class="card bg-warning text-white">
-              <div class="card-body">
-                OnePlus
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <div class="card bg-danger text-white">
-              <div class="card-body">
-                Xiaomi
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <div class="card bg-primary text-white">
-              <div class="card-body">
-                OPPO
-              </div>
-            </div>
-          </div>
-        </div>
+            <% } %>
       </div>
 </body>
 </html>

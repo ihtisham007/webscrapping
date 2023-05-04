@@ -1,8 +1,8 @@
 const express = require('express');
+const MobileControllers = require('./../controllers/MobileController');
+
 const router = express.Router();
 
-router.get('/', (req,res,next)=>{
-    res.render('companies');
-})
+router.get('/', MobileControllers.getMobileData)
 
 module.exports = router;
