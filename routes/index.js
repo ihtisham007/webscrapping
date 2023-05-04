@@ -65,6 +65,7 @@ router.post('/login', (req, res, next) => {
 
 			if (data.password == req.body.password) {
 				req.session.userId = data.unique_id;
+				req.session.name = data.username;
 				res.send({ "Success": "Success!" });
 			} else {
 				res.send({ "Success": "Wrong password!" });
@@ -92,7 +93,7 @@ router.get('/logout', sessionMiddleware.requireSession,(req, res, next) => {
 			if (err) {
 				return next(err);
 			} else {
-				return res.redirect('/register');
+				return res.redirect('/login');
 			}
 		});
 	}
