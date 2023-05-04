@@ -8,4 +8,8 @@ router
     .get(apiController.mobileCompaines)
     .post(apiController.saveCompany)
 
+router
+    .route('/mobile-company/:id')
+    .get(apiController.getBrandData)
+
 module.exports = router;

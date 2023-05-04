@@ -3,6 +3,12 @@ const MobileControllers = require('./../controllers/MobileController');
 
 const router = express.Router();
 
-router.get('/', MobileControllers.getMobileData)
+router
+    .route('/')
+    .get(MobileControllers.getMobileData)
+
+router
+    .route('/:id')
+    .get(MobileControllers.mobileBrandPage)
 
 module.exports = router;

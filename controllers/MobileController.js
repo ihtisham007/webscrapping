@@ -6,6 +6,13 @@ const getMobileData = async (req, res) =>{
     res.render('companies', {data: getAllCompaines});
 }  
 
+const mobileBrandPage = (req, res) => {
+    const brand = req.params.id;
+
+    res.render('companybrand', {brand: brand})
+}
+
 module.exports = {
-    getMobileData
+    getMobileData,
+    mobileBrandPage
 }
