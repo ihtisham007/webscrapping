@@ -8,9 +8,67 @@
 	</script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="./css/main.css">
+     <!-- Include custom CSS -->
+  <style>
+    /* Center the text in the divs */
+    .card {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      height: 150px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    /* Add some padding to the cards */
+    .card-body {
+      padding: 20px;
+    }
+  </style>
 </head>
 
 <body>
-    
+    <div class="container">
+        <div>
+            <h2>Mobile Companies</h2>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-4">
+            <div class="card bg-info text-white">
+              <div class="card-body">
+                Samsung
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card bg-success text-white">
+              <div class="card-body">
+                vivo
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card bg-warning text-white">
+              <div class="card-body">
+                OnePlus
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card bg-danger text-white">
+              <div class="card-body">
+                Xiaomi
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card bg-primary text-white">
+              <div class="card-body">
+                OPPO
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 </body>
 </html>

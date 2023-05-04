@@ -39,7 +39,7 @@ app.use(express.static(__dirname + '/views'));
 const index = require('./routes/index');
 const companiesRouter = require('./routes/CompaniesRouter');
 app.use('/', index);
-app.use('/companies',companiesRouter);
+app.use('/mobile-companies',companiesRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

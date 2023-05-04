@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/api', (req,res,next)=>{
-    res.json({
-        "msg": "yes"
-    })
+router.get('/', (req,res,next)=>{
+    res.render('companies');
 })
 
 module.exports = router;
