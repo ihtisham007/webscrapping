@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Login Register App</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+		body {
+			font-family: Arial, sans-serif;
+		}
+		.product {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			margin: 20px;
+		}
+		.product img {
+			width: 150px;
+			margin-right: 20px;
+		}
+		.product .details {
+			display: flex;
+			flex-direction: column;
+		}
+		.product .details h2 {
+			margin: 0;
+			font-size: 24px;
+		}
+		.product .details .rating {
+			margin-top: 10px;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+		}
+		.product .details .rating .user-rating {
+			margin-right: 10px;
+		}
+		.product .details .rating .expert-rating {
+			margin-right: 10px;
+		}
+		.product .details .spec-score {
+			margin-top: 10px;
+			font-weight: bold;
+		}
+		.product .details .key-specs {
+			margin-top: 10px;
+		}
+	</style>
+
+</head>
+<body>
+    <%- include('header') %>
+    <div class="product">
+		<img src="<%= data.image %>" alt="<%= data.title %>">
+		<div class="details">
+			<h2><%= data.title %></h2>
+			<div class="rating">
+				<div class="user-rating">User rating: <%= data.userrating %></div>
+				<div class="expert-rating">Expert rating: <%= data.expertrating %></div>
+               
+			</div>
+            <div>
+                <h2>Price</h2>
+                <div class="price"> <%= data.price %></div>
+            </div>
+			<div class="spec-score">Spec score: <%= data.specscore %></div>
+			<div class="key-specs">
+				<h3>Key specs:</h3>
+				<%- data.keyspcechtml %>
+			</div>
+			
+		</div>
+	</div>
+</body>
+</html>

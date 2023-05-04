@@ -12,4 +12,8 @@ router
     .route('/mobile-company/:id')
     .get(apiController.getBrandData)
 
+router
+    .route('/single-mobile/:id')
+    .get(apiController.getSingleBrandData)
+
 module.exports = router;

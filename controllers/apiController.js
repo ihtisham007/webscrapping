@@ -73,8 +73,50 @@ const getBrandData = (req, res) =>{
     });
 }
 
+//single page Scrapping
+const getSingleBrandData = (req, res) =>{
+    // URL of the webpage to scrape
+    const getBrand = req.params.id.replaceAll(' ', '-');
+    console.log(getBrand);
+    const url = `https://www.91mobiles.com/${getBrand.toLowerCase()}-price-in-india`;
+
+    // Make a GET request to the URL
+    axios.get(url)
+    .then(response => {
+        // Load the HTML document into cheerio
+        const $ = cheerio.load(response.data);
+
+        const title = $('.h1_pro_head').text();
+        const price = "Rs " + $('.big_prc').eq(1).text();
+        const userRating = $('.ratpt').eq(0).text();
+        const expertRating = $('.ratpt').eq(0).text();
+        const specScore = $('.top_box div div').eq(0).text();
+        const KeySpechtml = $('.spec_rvw_pnl').eq(5).html();
+        const img         = $('#img_01').attr('src').slice(2);
+        
+        res
+            .status(200)
+            .json({
+                "status": "success",
+                data: {
+                    title: title,
+                    price: price,
+                    userrating: userRating,
+                    expertrating: expertRating,
+                    specscore: specScore,
+                    keyspcechtml: KeySpechtml,
+                    image: "https://" + img
+                }
+            })
+    })
+    .catch(error => {
+        console.error(`Error fetching ${url}: ${error}`);
+    });
+}
+
 module.exports = {
     mobileCompaines,
     saveCompany,
-    getBrandData
+    getBrandData,
+    getSingleBrandData
 }

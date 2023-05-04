@@ -26,6 +26,7 @@
         .mobile-name {
           font-size: 18px;
           font-weight: bold;
+          color: black;
         }
         .mobile-price {
           font-size: 16px;
@@ -44,6 +45,7 @@
   <div class="container">
     <h1>Mobile List</h1>
     <% for (let i =0 ;i<brand.length;i++) { %>
+    <a href="/singlepage/<%= brand[i].name  %>">
       <div class="mobile-container">
         <img src="<%= brand[i].image %>" alt="Mobile Image" class="mobile-image">
         <div class="mobile-info">
@@ -54,6 +56,7 @@
           </div>
         </div>
       </div>
+    </a>
     <% } %>
   </div>
 </body>

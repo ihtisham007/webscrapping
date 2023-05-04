@@ -16,7 +16,14 @@ const mobileBrandPage = async (req, res) => {
     res.render('companybrand', {brand: get.data.data,user: req.session.name})
 }
 
+const singleBrandPage  = async (req,res) =>{
+    const singleMobile = req.params.id.toLowerCase();
+    const singleProduct = await axios.get(`http://localhost:3000/api/v1/single-mobile/${singleMobile}`)
+    res.render('singlecompanybrand', {data: singleProduct.data.data, user: req.session.name});
+}
+
 module.exports = {
     getMobileData,
-    mobileBrandPage
+    mobileBrandPage,
+    singleBrandPage
 }
