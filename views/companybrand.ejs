@@ -7,10 +7,53 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 	</script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="./css/main.css">
+    <style>
+        /* Apply CSS styling here */
+        .mobile-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: center;
+          margin: 20px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+        }
+        .mobile-image {
+          max-width: 100px;
+          margin-right: 10px;
+        }
+        .mobile-name {
+          font-size: 18px;
+          font-weight: bold;
+        }
+        .mobile-price {
+          font-size: 16px;
+          color: green;
+          margin-top: 5px;
+        }
+        .mobile-features {
+          font-size: 14px;
+          margin-top: 10px;
+        }
+      </style>
 </head>
 
 <body>
-    <h1><%= brand %></h1>
+  <div class="container">
+    <h1>Mobile List</h1>
+    <% for (let i =0 ;i<brand.length;i++) { %>
+      <div class="mobile-container">
+        <img src="<%= brand[i].image %>" alt="Mobile Image" class="mobile-image">
+        <div class="mobile-info">
+          <div class="mobile-name"><%= brand[i].name %></div>
+          <div class="mobile-price"><%= brand[i].price %></div>
+          <div class="mobile-features">
+        
+          </div>
+        </div>
+      </div>
+    <% } %>
+  </div>
 </body>
 </html>

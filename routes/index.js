@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const sessionMiddleware = require('./../middleware/sessionMiddleware');
 
-router.get('/', (req, res, next) => {
+router.get('/register',sessionMiddleware.notRequireSession,(req, res, next) => {
 	return res.render('index.ejs');
 });
 
@@ -54,7 +55,7 @@ router.post('/', (req, res, next) => {
 	}
 });
 
-router.get('/login', (req, res, next) => {
+router.get('/login',sessionMiddleware.notRequireSession,(req, res, next) => {
 	return res.render('login.ejs');
 });
 
@@ -74,24 +75,24 @@ router.post('/login', (req, res, next) => {
 	});
 });
 
-router.get('/profile', (req, res, next) => {
+router.get('/profile', sessionMiddleware.requireSession,(req, res, next) => {
 	User.findOne({ unique_id: req.session.userId }, (err, data) => {
 		if (!data) {
-			res.redirect('/');
+			res.redirect('/register');
 		} else {
 			return res.render('data.ejs', { "name": data.username, "email": data.email });
 		}
 	});
 });
 
-router.get('/logout', (req, res, next) => {
+router.get('/logout', sessionMiddleware.requireSession,(req, res, next) => {
 	if (req.session) {
 		// delete session object
 		req.session.destroy((err) => {
 			if (err) {
 				return next(err);
 			} else {
-				return res.redirect('/');
+				return res.redirect('/register');
 			}
 		});
 	}

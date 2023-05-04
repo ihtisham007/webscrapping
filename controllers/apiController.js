@@ -42,21 +42,23 @@ const getBrandData = (req, res) =>{
     .then(response => {
         // Load the HTML document into cheerio
         const $ = cheerio.load(response.data);
-        let data = {};
-        
+        let data = [];
+
         // Iterate through each .finder_snipet_wrap element
         $('.finder_snipet_wrap').each((i, el) => {
             // Extract the image URL, price, and features
-            const imageUrl = $(el).find('img').attr('src');
-            const price = $(el).find('.price').text();
-            const name = $(el).find('ul').text();
+            const imageUrl = $(el).find('img').attr('src').slice(2);
+            const price = $(el).find('.price').text().replace(/[\s\n]+/g, '');;
+            const name = $(el).find('ul').text().replace(/\n+/g, '').trim();
 
             // Append the data to the object
-            data[i] = {
-                image: imageUrl,
+            const tempdata = {
+                image: "https://"+imageUrl,
                 price: price,
                 name: name
             };
+
+            data.push(tempdata)
         });
 
         res
