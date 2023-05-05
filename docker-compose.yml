@@ -3,8 +3,22 @@ services:
   mongodb:
     image: mongo
     container_name: mongodb
-    restart: always
     ports:
       - "27017:27017"
-    # volumes:
-    #   - ./data:/data/db
+    networks:
+      - webscrapping
+    volumes:
+      - ./data:/data/db
+  mvc:
+    build: ./
+    ports: 
+      - "3000:3000"
+    networks:
+      - webscrapping
+    depends_on:
+      - mongodb
+    volumes:
+      - ./:/mvc
+
+networks:
+  webscrapping:
