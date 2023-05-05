@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Login Register App</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        /* Apply CSS styling here */
+        .mobile-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: center;
+          margin: 20px;
+          padding: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+        }
+        .mobile-image {
+          max-width: 100px;
+          margin-right: 10px;
+        }
+        .mobile-name {
+          font-size: 18px;
+          font-weight: bold;
+          color: black;
+        }
+        .mobile-price {
+          font-size: 16px;
+          color: green;
+          margin-top: 5px;
+        }
+        .mobile-features {
+          font-size: 14px;
+          margin-top: 10px;
+        }
+      </style>
+</head>
+
+<body>
+    <%- include('header') %>
+    <div class="container">
+        <div class="form-row align-items-center">
+            <div class="col-md-12 col-sm-12 mb-2">
+                <div class="form-group">
+                    <label for="SearchBoxMobile">Search Mobile</label>
+                    <input type="text" class="form-control" id="SearchBoxMobile"  placeholder="Search..." />
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleFormControlSelect1">Example select</label>
+                    <select class="form-control" id="exampleFormControlSelect1">
+                      <option value="">Select...</option>
+                      <option>Oppo</option>
+                      <option>Samsung</option>
+                      <option>Vivo</option>
+                      <option>OnePlus</option>
+                      <option>Xiaomi</option>
+                    </select>
+                  </div>
+                  <input id="range" type="range" value="0" min="0" max="30000" oninput="this.nextElementSibling.value = this.value">
+                  <output>24</output>
+                  <div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+            </div>
+            <!-- show result in this section -->
+            <div class="result" style="margin-top:100px">
+
+            </div>
+    </div>
+          <!-- Custom JavaScript code to handle search form submission -->
+          <script>
+            
+            
+            $('button').click(function(){
+
+              const search =  document.querySelector('#SearchBoxMobile').value
+              const selectMobile =  document.querySelector('#exampleFormControlSelect1').value
+              const range =  parseInt(document.querySelector('#range').value);
+                console.log(search);
+                $.ajax({
+                    url: '/api/v1/search',
+                    type: 'GET',
+                    data: {
+                        name: selectMobile,
+                        searchBox: search,
+                        range: range
+                    },
+                    success: function (response) {
+                        // Handle the response
+                        $('.result').html('');
+                        setResultFromData(response.data)
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle errors
+                        console.error(xhr, status, error);
+                    }
+                });
+            })
+
+            function setResultFromData(brand){
+                 for (let i =0 ;i<brand.length;i++) { 
+                  const getHtml = `<a href="/singlepage/${brand[i].name}%>">
+                    <div class="mobile-container">
+                        <img src="${brand[i].image}" alt="Mobile Image" class="mobile-image">
+                        <div class="mobile-info">
+                        <div class="mobile-name">${brand[i].name}</div>
+                        <div class="mobile-price">${brand[i].price}</div>
+                        <div class="mobile-features">
+                        
+                        </div>
+                        </div>
+                    </div>
+                    </a>`
+                    $('.result').append(getHtml);
+                    } 
+            }
+            // Get references to form elements
+            
+          </script>
+                    
+    
+</body>
+</html>

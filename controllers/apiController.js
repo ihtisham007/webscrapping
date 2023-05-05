@@ -54,10 +54,12 @@ const getBrandData = (req, res) =>{
             const name = $(el).find('ul').text().replace(/\n+/g, '').trim();
 
             // Append the data to the object
+            let priceSet = price.slice(3).replace(',','')
+            priceSet = parseFloat(priceSet);
             const tempdata = {
                 brand: getBrand,
                 image: "https://"+imageUrl,
-                price: price,
+                price:  priceSet,
                 name: name
             };
 
@@ -125,9 +127,55 @@ const getSingleBrandData = (req, res) =>{
     });
 }
 
+const searchSingleBrand = async (req,res) =>{
+    const { name, searchBox, range } = req.query;
+    console.log(`name ${req.query}`);
+
+    const nameReg = new RegExp(`${name}`);
+    const searchBoxReg = new RegExp(`${searchBox}`);
+
+    let query = {}
+    //for Name
+    if(name.length >0 && searchBox.length === 0 && range === '0')
+        query = {brand: {$regex: nameReg, $options: 'i'}}
+    //Search Box
+    else if(name.length === 0 && searchBox.length > 0 && range === '0')
+        query = { name: {$regex: searchBoxReg, $options: 'i' }};
+    //range
+    else if(name.length === 0 && searchBox.length === 0 && range > '0') 
+        query = { price: { $lte: range } };
+    // name and search box
+    else if(name.length > 0 && searchBox.length > 0 && range === '0')
+        query = {brand: { $regex: nameReg,$options: 'i' },name: { $regex: searchBoxReg, $options: 'i' }};
+    // name and range
+    else if (name.length > 0 && searchBox.length === 0 && range > 0) 
+        query = {name: { $regex: nameReg,$options: 'i' },price: { $lte: range }};
+    //search box and range
+    else if (name.length === 0 && searchBox.length > 0 && range > 0) 
+        query = {name: { $regex: searchBoxReg,$options: 'i' },price: { $lte: range }};
+    //all 
+    else if (name.length > 0 && searchBox.length > 0 && range > 0) 
+        query = {name: { $regex: searchBoxReg,$options: 'i' },brand: { $regex: nameReg,$options: 'i' },price: { $lte: range }};
+    console.log(req.query);
+//{brand: {$regex: nameReg,$options: 'i'}}
+    try{
+        let mobiles = []
+        mobiles = await mobileModel.find(query)
+        res
+            .status(200)
+            .json({
+                status: "success",
+                data: mobiles
+            })
+    }catch(error){
+
+    }
+}
+
 module.exports = {
     mobileCompaines,
     saveCompany,
     getBrandData,
-    getSingleBrandData
+    getSingleBrandData,
+    searchSingleBrand
 }

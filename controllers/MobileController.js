@@ -22,8 +22,15 @@ const singleBrandPage  = async (req,res) =>{
     res.render('singlecompanybrand', {data: singleProduct.data.data, user: req.session.name});
 }
 
+const searchBrand = async (req, res) =>{
+    console.log(123);
+    res
+        .render('search',{user: req.session.name});
+}
+
 module.exports = {
     getMobileData,
     mobileBrandPage,
-    singleBrandPage
+    singleBrandPage,
+    searchBrand
 }

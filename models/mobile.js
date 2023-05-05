@@ -6,7 +6,7 @@ const mobileSchema = new Schema({
     brand: String,
     name: String,
     image: String,
-    price: String,
+    price: Number,
     createdAt: {
 		type: Date,
 		default: Date.now

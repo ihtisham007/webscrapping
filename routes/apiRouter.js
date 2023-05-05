@@ -9,6 +9,10 @@ router
     .post(apiController.saveCompany)
 
 router
+    .route('/search')
+    .get(apiController.searchSingleBrand);
+
+router
     .route('/mobile-company/:id')
     .get(apiController.getBrandData)
 
