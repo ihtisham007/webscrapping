@@ -41,7 +41,7 @@ const getBrandData = (req, res) =>{
     let data = [];
     // Make a GET request to the URL
     axios.get(url)
-    .then(response => {
+    .then( async response => {
         // Load the HTML document into cheerio
         const $ = cheerio.load(response.data);
         
@@ -65,8 +65,8 @@ const getBrandData = (req, res) =>{
             
         });
 
-        mobileModel.deleteMany({brand: getBrand});
-        mobileModel.insertMany(data);
+        await  mobileModel.deleteMany({brand: getBrand});
+        await mobileModel.insertMany(data);
             
         res
             .status(200)
