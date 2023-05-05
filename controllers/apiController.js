@@ -1,6 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const companiesModel = require('./../models/companies');
+const mobileModel    = require('./../models/mobile');
 
 //get all companies data
 const mobileCompaines = async (req, res) =>{
@@ -37,12 +38,13 @@ const getBrandData = (req, res) =>{
     const getBrand = req.params.id;
     const url = `https://www.91mobiles.com/${getBrand}-mobile-price-list-in-india`;
 
+    let data = [];
     // Make a GET request to the URL
     axios.get(url)
     .then(response => {
         // Load the HTML document into cheerio
         const $ = cheerio.load(response.data);
-        let data = [];
+        
 
         // Iterate through each .finder_snipet_wrap element
         $('.finder_snipet_wrap').each((i, el) => {
@@ -53,30 +55,39 @@ const getBrandData = (req, res) =>{
 
             // Append the data to the object
             const tempdata = {
+                brand: getBrand,
                 image: "https://"+imageUrl,
                 price: price,
                 name: name
             };
 
             data.push(tempdata)
+            
         });
 
+        mobileModel.deleteMany({brand: getBrand});
+        mobileModel.insertMany(data);
+            
         res
             .status(200)
             .json({
                 "status": "success",
                 data: data
-            })
+    })
+
     })
     .catch(error => {
         console.error(`Error fetching ${url}: ${error}`);
     });
+
+    
 }
 
 //single page Scrapping
 const getSingleBrandData = (req, res) =>{
     // URL of the webpage to scrape
-    const getBrand = req.params.id.replaceAll(' ', '-');
+    let getBrand = req.params.id.replaceAll(' ', '-');
+    getBrand = getBrand.replace('-5g','');
     console.log(getBrand);
     const url = `https://www.91mobiles.com/${getBrand.toLowerCase()}-price-in-india`;
 
