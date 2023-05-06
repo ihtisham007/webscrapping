@@ -6,8 +6,24 @@ const mobileModel    = require('./../models/mobile');
 //get all companies data
 const mobileCompaines = async (req, res) =>{
 
-    const getAllCompaines = await companiesModel.find();
-
+   // const getAllCompaines = await companiesModel.find();
+    const getAllCompaines = [
+        {
+            "competitor": "Samsung"
+        },
+        {
+            "competitor": "Vivo",
+        },
+        {
+            "competitor": "OnePlus",
+        },
+        {
+            "competitor": "Xiaomi",
+        },
+        {
+            "competitor": "OPPO",
+        }
+    ]
     res
         .status(200)
         .json({
