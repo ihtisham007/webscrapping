@@ -14,7 +14,7 @@ You need to have installed Node.js, NPM and MongoDB in your System.
 ```
 npm install
 ```
-### In case you have not install mongodb then run this command
+### In case you don't have mongodb and node-js then run this command
 
 ```
 docker-compose up -d
