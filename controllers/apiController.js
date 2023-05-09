@@ -68,6 +68,7 @@ const getBrandData = (req, res) =>{
             const imageUrl = $(el).find('img').attr('src').slice(2);
             const price = $(el).find('.price').text().replace(/[\s\n]+/g, '');;
             const name = $(el).find('ul').text().replace(/\n+/g, '').trim();
+            const link = $(el).find('.hover_blue_link.name.gaclick').attr('href');
 
             // Append the data to the object
             let priceSet = price.slice(3).replace(',','')
@@ -76,9 +77,10 @@ const getBrandData = (req, res) =>{
                 brand: getBrand,
                 image: "https://"+imageUrl,
                 price:  priceSet,
-                name: name
+                name: name,
+                link: link
             };
-
+            console.log(tempdata);
             data.push(tempdata)
             
         });

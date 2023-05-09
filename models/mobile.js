@@ -7,6 +7,7 @@ const mobileSchema = new Schema({
     name: String,
     image: String,
     price: Number,
+    link: String,
     createdAt: {
 		type: Date,
 		default: Date.now

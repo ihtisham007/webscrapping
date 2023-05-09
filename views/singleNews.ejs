@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Login Register App</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        a h5{
+            color: black;
+        }
+        a{
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+  <%- include('header') %>
+  <div class="container">
+    <%- data.html %>
+    </div>
+
+    <script>
+        $('img').each(function(index, value) {
+                if(value.hasAttribute('data-src')){
+                    const getSrc = value.getAttribute('data-src');
+                    value.setAttribute('src',`${getSrc}`);
+                }
+        });
+    </script>
+</body>
+</html>

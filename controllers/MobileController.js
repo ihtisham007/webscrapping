@@ -3,9 +3,8 @@ const axios = require('axios');
 const companiesModel = require('./../models/companies');
 
 const getMobileData = async (req, res) =>{
-    
-    console.log(req.session.name);
     // const getAllCompaines = await companiesModel.find();
+   // const getAllCompaines = axios.get('http://localhost:3000/api/v1/mobile-companies')
     const getAllCompaines = [
         {
             "competitor": "Samsung"
